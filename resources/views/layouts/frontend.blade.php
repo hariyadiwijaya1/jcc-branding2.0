@@ -83,13 +83,26 @@
                     <a class="getstarted scrollto" href="{{ route('register') }}">Register</a>
                     @endif
                     @else
-                    <a class="p-2 link-secondary" href="{{ route('logout') }}" onclick="event.preventDefault();
-                              document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
-                    <a class="p-2 link-secondary" href="{{ route('profile', auth()->user()->id) }}">
-                        {{ auth()->user()->name }}</a>
+                    <li class="dropdown"><a href="#" class="fa-solid fa-user"><i style="font-size: 32px;" class="bi-person-circle"></i> <i class="bi bi-chevron-down"></i></a>
 
+                        <ul>
+                            <li>
+                                <a
+                                class="nav-link scrollto"
+                                href="{{ route('profile', auth()->user()->id) }}">
+                                Profil
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>

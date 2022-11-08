@@ -10,6 +10,25 @@
             </li>
             <li class="app-sidebar__heading">UI Components</li>
             <li>
+                <a href="{{ route('pinjaman.index', []) }}">
+                    <i class="metismenu-icon pe-7s-car"></i>
+                    Pinjaman
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('bunga.index', []) }}">
+                    <i class="metismenu-icon pe-7s-car"></i>
+                    Bunga
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('pinjaman.index', []) }}">
+                    <i class="metismenu-icon pe-7s-car"></i>
+                    Anggota
+                </a>
+            </li>
+            <li class="app-sidebar__heading">PRO Version</li>
+            <li>
                 <a href="#">
                     <i class="metismenu-icon pe-7s-diamond"></i>
                     Manajemen Pengguna
@@ -30,31 +49,6 @@
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="{{ route('pinjaman.index', []) }}">
-                    <i class="metismenu-icon pe-7s-car"></i>
-                    Pinjaman
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('pinjaman.index', []) }}">
-                    <i class="metismenu-icon pe-7s-car"></i>
-                    Bunga
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('pinjaman.index', []) }}">
-                    <i class="metismenu-icon pe-7s-car"></i>
-                    Bunga
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('pinjaman.index', []) }}">
-                    <i class="metismenu-icon pe-7s-car"></i>
-                    Anggota
-                </a>
-            </li>
-            <li class="app-sidebar__heading">PRO Version</li>
             <li>
                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="metismenu-icon pe-7s-rocket"></i>

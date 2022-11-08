@@ -33,8 +33,25 @@
             <li>
                 <a href="{{ route('pinjaman.index', []) }}">
                     <i class="metismenu-icon pe-7s-car"></i>
-                    Components
-                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                    Pinjaman
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('pinjaman.index', []) }}">
+                    <i class="metismenu-icon pe-7s-car"></i>
+                    Bunga
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('pinjaman.index', []) }}">
+                    <i class="metismenu-icon pe-7s-car"></i>
+                    Bunga
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('pinjaman.index', []) }}">
+                    <i class="metismenu-icon pe-7s-car"></i>
+                    Anggota
                 </a>
             </li>
             <li class="app-sidebar__heading">PRO Version</li>

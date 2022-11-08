@@ -46,8 +46,6 @@
                                 <th>Tenor</th>
                                 <th>Suku Bunga</th>
                                 <th>Tunggakan</th>
-                                {{-- <th>Angsuran Bunga</th> --}}
-                                {{-- <th>Angsuran Pokok</th> --}}
                                 <th>Angsuran Total</th>
                                 <th>Status</th>
                                 <th class="text-center"><i class="fa fa-cogs"></i></th>
@@ -128,14 +126,7 @@ $(function() {
                 data: 'arrears',
                 name: 'arrears'
             },
-            // {
-            //     data: 'angsuran_bunga',
-            //     name: 'angsuran_bunga'
-            // },
-            // {
-            //     data: 'angsuran_pokok',
-            //     name: 'angsuran_pokok'
-            // },
+
             {
                 data: 'total_angsuran',
                 name: 'total_angsuran'

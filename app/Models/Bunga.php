@@ -9,4 +9,6 @@ class Bunga extends Model
 {
     use HasFactory;
     protected $table = 'bunga';
+
+    protected $fillable = ['suku_bunga'];
 }

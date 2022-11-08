@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{HomeController, UserController, RoleController, PinjamanController, DropdownController, AngsuranController};
+use App\Http\Controllers\BungaController;
+use App\Http\Controllers\{AnggotaController, HomeController, UserController, RoleController, PinjamanController, DropdownController, AngsuranController};
 
 Route::get('kota', [DropdownController::class, 'kota'])->name('dropdown.kota');
 Route::get('kecamatan', [DropdownController::class, 'kecamatan'])->name('dropdown.kecamatan');
@@ -21,6 +22,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resources(['users' => UserController::class]);
     Route::resources(['roles' => RoleController::class]);
+
+
     Route::get('pinjaman/export', [PinjamanController::class, 'export'])->name('pinjaman.export');
     Route::post('pinjaman/import', [PinjamanController::class, 'import'])->name('pinjaman.import');
     Route::post('pinjaman/status/{pinjaman}', [PinjamanController::class, 'status'])->name('pinjaman.status');
@@ -29,4 +32,6 @@ Route::middleware('auth')->group(function () {
     Route::get('angsuran/{angsuran}/export', [AngsuranController::class, 'export'])->name('angsuran.export');
     Route::resources(['pinjaman' => PinjamanController::class]);
     Route::resources(['angsuran' => AngsuranController::class]);
+    Route::resources(['bunga' => BungaController::class]);
+    Route::resources(['anggota' => AnggotaController::class]);
 });

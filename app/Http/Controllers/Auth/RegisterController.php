@@ -57,13 +57,13 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'telepon' => ['required', 'max:255'],
-            'nik' => ['required', 'max:255'],
-            'pekerjaan' => ['required', 'max:255'],
-            'provinsi' => ['required'],
-            'kota' => ['required'],
-            'kecamatan' => ['required'],
-            'desa' => ['required'],
+            // 'telepon' => ['required', 'max:255'],
+            // 'nik' => ['required', 'max:255'],
+            // 'pekerjaan' => ['required', 'max:255'],
+            // 'provinsi' => ['required'],
+            // 'kota' => ['required'],
+            // 'kecamatan' => ['required'],
+            // 'desa' => ['required'],
         ]);
     }
 
@@ -87,14 +87,14 @@ class RegisterController extends Controller
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
-                'nik' => $data['nik'],
-                'telepon' => $data['telepon'],
-                'pekerjaan' => $data['pekerjaan'],
-                'provinsi' => $data['provinsi'],
-                'kota' => $data['kota'],
-                'kecamatan' => $data['kecamatan'],
-                'desa' => $data['desa'],
-                'alamat' => $data['alamat'],
+                // 'nik' => $data['nik'],
+                // 'telepon' => $data['telepon'],
+                // 'pekerjaan' => $data['pekerjaan'],
+                // 'provinsi' => $data['provinsi'],
+                // 'kota' => $data['kota'],
+                // 'kecamatan' => $data['kecamatan'],
+                // 'desa' => $data['desa'],
+                // 'alamat' => $data['alamat'],
             ]);
     }
 }

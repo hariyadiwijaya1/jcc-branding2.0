@@ -3,7 +3,7 @@
         <ul class="vertical-nav-menu">
             <li class="app-sidebar__heading">Dashboards</li>
             <li>
-                <a href="{{ route('home') }}" class="mm-active">
+                <a href="{{ route('dashboard') }}" class="mm-active">
                     <i class="metismenu-icon pe-7s-rocket"></i>
                     Dashboard
                 </a>
@@ -22,7 +22,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('pinjaman.index', []) }}">
+                <a href="{{ route('anggota.index', []) }}">
                     <i class="metismenu-icon pe-7s-car"></i>
                     Anggota
                 </a>

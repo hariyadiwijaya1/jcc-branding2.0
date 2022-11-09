@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Exception;
 use Carbon\Carbon;
+use App\Exports\PinjamanExport;
+use App\Imports\PinjamanImport;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\{Bunga, Angsuran, Pinjaman};
 
@@ -114,6 +117,29 @@ class PinjamanController extends Controller
             'status' => request('status'),
             'tanggal_pinjam' => date('Y-m-d'),
         ]);
+
+        foreach ($pinjaman->angsuran() as $i => $angsuran) {
+            $angsuran->update([
+                'jatuh_tempo' => Carbon::parse($pinjaman->tanggal_pinjam)->addMonth($i+1)->format('Y-m-d'),
+            ]);
+        }
         return redirect()->back();
     }
+
+    public function export()
+    {
+        return Excel::download(new PinjamanExport(), 'pinjaman'.date('Y-m-dH-i-s').'.xlsx');
+    }
+
+    public function import()
+    {
+        request()->validate([
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+
+        Excel::import(new PinjamanImport, request()->file('file')->store('file'));
+
+        return redirect()->route('pinjaman.index');
+    }
+
 }

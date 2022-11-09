@@ -12,13 +12,20 @@ class Pinjaman extends Model
 
     protected $guarded = [];
     protected $table = 'pinjaman';
-    protected $appends = ['angsuran', 'arrears'];
+    protected $appends = ['angsuran', 'arrears', 'sudah_bayar'];
 
     public function getArrearsAttribute()
     {
         return Angsuran::where('pinjaman_id', $this->id)
             ->where('status', '0')
             ->where('jatuh_tempo', '<', \Carbon\Carbon::now())
+            ->sum('total');
+    }
+
+    public function getSudahBayarAttribute()
+    {
+        return Angsuran::where('pinjaman_id', $this->id)
+            ->where('status', '1')
             ->sum('total');
     }
 

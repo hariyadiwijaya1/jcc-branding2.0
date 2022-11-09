@@ -2,20 +2,16 @@
 
 namespace App\Exports;
 
-use App\Models\Angsuran;
+use App\Models\Pinjaman;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class PinjamanExport implements FromCollection
 {
-    protected $id;
-
-    public function construct($id)
-    {
-        $this->id = $id;
-    }
-
+    /**
+    * @return \Illuminate\Support\Collection
+    */
     public function collection()
     {
-        return Angsuran::all();
+        return Pinjaman::get(['user_id', 'total_pinjaman', 'saldo_pinjaman', 'tanggal_pinjam', 'status', 'tenor', 'tunggakan', 'angsuran_bunga', 'angsuran_pokok', 'suku_bunga', 'total_angsuran', 'keterangan']);
     }
 }

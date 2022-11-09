@@ -1,4 +1,4 @@
-@extends('layouts/app', ['title' => 'User'])
+@extends('layouts/app', ['title' => 'Anggota'])
 
 @section('content')
 @include('sweetalert::alert')
@@ -14,14 +14,18 @@
                         <div class="page-title-subheading">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                                <li class="active breadcrumb-item" aria-current="page">User</li>
+                                <li class="active breadcrumb-item" aria-current="page">Anggota</li>
                             </ol>
                         </div>
                     </div>
                 </div>
                 <div class="page-title-actions">
                     <a href="{{ route('users.create') }}" class="btn-shadow btn-sm mr-3 btn btn-primary">
-                        Tambah
+                        Import
+                        <i class="fa fa-plus"></i>
+                    </a>
+                    <a href="{{ route('anggota.export') }}" class="btn-shadow btn-sm mr-3 btn btn-primary">
+                        Export
                         <i class="fa fa-plus"></i>
                     </a>
                 </div>

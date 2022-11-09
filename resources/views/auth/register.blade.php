@@ -1,287 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Register</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-</head>
-
-<body>
-
-    <div class="container my-3">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Register</h3>
-                    </div>
-                    <div class="card-body">
-                        <form action="{{ route('register') }}" method="post">
-                            @csrf
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input name="email" id="email"
-                                            class="form-control form-control-sm @error('email') is-invalid @enderror"
-                                            value="{{ old('email') }}">
-                                        @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input name="password" id="password" class="form-control form-control-sm">
-                                    </div>
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                    <div class="form-group">
-                                        <label for="password_confirmation">Konfirmasi Password</label>
-                                        <input name="password_confirmation" id="password_confirmation" class="form-control form-control-sm">
-                                        @error('password_confirmation')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="name">Nama Lengkap</label>
-                                        <input name="name" id="name" class="form-control form-control-sm">
-                                        @error('name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nik">NIK KTP</label>
-                                        <input name="nik" id="nik" class="form-control form-control-sm">
-                                        @error('nik')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="telepon">Telepon</label>
-                                        <input type="number" name="telepon" id="telepon" class="form-control form-control-sm">
-                                        @error('telepon')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="pekerjaan">Pekerjaan</label>
-                                        <input type="text" name="pekerjaan" id="pekerjaan" class="form-control form-control-sm">
-                                        @error('pekerjaan')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="provinsi">Provinsi <span class="text-danger">*</span></label>
-                                        <select name="provinsi" id="provinsi"
-                                            class="form-control form-control-sm @error('provinsi') is-invalid @enderror">
-                                            <option selected disabled>Pilih Provinsi</option>
-                                            @foreach ($provinsi as $data)
-                                                <option value="{{ $data->code }}">{{ $data->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    @error('provinsi')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                    <div class="form-group">
-                                        <label for="kota">Kabupaten/Kota <span class="text-danger">*</span></label>
-                                        <select name="kota" id="kota"
-                                            class="form-control form-control-sm @error('kota') is-invalid @enderror">
-                                            <option selected disabled>Pilih Kabuptaen/Kota</option>
-                                        </select>
-                                        @error('kota')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="kecamatan">Kecamatan <span class="text-danger">*</span></label>
-                                        <select name="kecamatan" id="kecamatan"
-                                            class="form-control form-control-sm @error('kecamatan') is-invalid @enderror">
-                                            <option selected disabled>Pilih Kecamatan</option>
-                                        </select>
-                                        @error('kecamatan')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="desa">Desa <span class="text-danger">*</span></label>
-                                        <select name="desa" id="desa"
-                                            class="form-control form-control-sm @error('desa') is-invalid @enderror">
-                                            <option selected disabled>Pilih Desa</option>
-                                        </select>
-                                        @error('desa')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="alamat">Alamat</label>
-                                        <textarea name="alamat" id="alamat" class="form-control form-control-sm"></textarea>
-                                        @error('alamat')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-sm btn-primary my-3 float-right">Submit</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>K-WD Dashboard | Register</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{asset('tailwind')}}/public/build/css/tailwind.css" />
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
+  </head>
+  <body>
+    <div x-data="setup()" x-init="$refs.loading.classList.add('hidden'); setColors(color);" :class="{ 'dark': isDark}">
+        <!-- Loading screen -->
+        <div
+          x-ref="loading"
+          class="fixed inset-0 z-50 flex items-center justify-center text-2xl font-semibold text-white bg-primary-darker"
+        >
+          Loading.....
         </div>
+        <div
+          class="flex flex-col items-center justify-center min-h-screen p-4 space-y-4 antialiased text-gray-900 bg-gray-100 dark:bg-dark dark:text-light"
+        >
+          <!-- Brand -->
+          <a
+            href="{{route('home')}}"
+            class="inline-block mb-6 text-3xl font-bold tracking-wider uppercase text-primary-dark dark:text-light"
+          >
+            K-WD
+          </a>
+          <main>
+            <div class="w-full max-w-sm px-4 py-6 space-y-6 bg-white rounded-md dark:bg-darker">
+              <h1 class="text-xl font-semibold text-center">Register</h1>
+              <form action="{{ route('register') }}" method="post" class="space-y-6">
+                  @csrf
+                <input
+                  class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker"
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Nama Lengkap"
+                />
+                @error('name')
+                    <span class="text-red-500 px-4 py-2 text-xs red" role="alert">
+                        {{ $message }}
+                    </span>
+                @enderror
+
+                <input
+                  class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker"
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Email"
+                />
+                @error('email')
+                    <span class="text-red-500 px-4 py-2 text-xs red" role="alert">
+                        {{ $message }}
+                    </span>
+                @enderror
+
+                <input
+                  class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker"
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Password"
+                />
+                @error('password')
+                    <span class="text-red-500 px-4 py-2 text-xs red" role="alert">
+                        {{ $message }}
+                    </span>
+                @enderror
+
+                <input
+                  class="w-full px-4 py-2 border rounded-md dark:bg-darker dark:border-gray-700 focus:outline-none focus:ring focus:ring-primary-100 dark:focus:ring-primary-darker"
+                  type="password"
+                  id="password_confirmation"
+                  name="password_confirmation"
+                  placeholder="Confirm Password"
+                />
+                @error('password_confirmation')
+                    <span class="text-red-500 px-4 py-2 text-xs red" role="alert">
+                        {{ $message }}
+                    </span>
+                @enderror
+
+                <div class="flex items-center justify-between">
+                  <!-- Remember me toggle -->
+                  <label class="flex items-center">
+                    <div class="relative inline-flex items-center">
+                      <input
+                        type="checkbox"
+                        name="accept_terms"
+                        class="w-10 h-4 transition bg-gray-200 border-none rounded-full shadow-inner outline-none appearance-none toggle checked:bg-primary-light disabled:bg-gray-200 focus:outline-none"
+                      />
+                      <span
+                        class="absolute top-0 left-0 w-4 h-4 transition-all transform scale-150 bg-white rounded-full shadow-sm"
+                      ></span>
+                    </div>
+                    <span class="ml-3 text-sm font-normal text-gray-500 dark:text-gray-400">
+                      I accept the
+                      <a href="#" class="text-sm text-blue-600 hover:underline">Terms and Conditions</a>
+                    </span>
+                  </label>
+                </div>
+                <div>
+                  <button
+                    type="submit"
+                    class="w-full px-4 py-2 font-medium text-center text-white transition-colors duration-200 rounded-md bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 dark:focus:ring-offset-darker"
+                  >
+                    Register
+                  </button>
+                </div>
+              </form>
+
+              <!-- Login link -->
+              <div class="text-sm text-gray-600 dark:text-gray-400">
+                Already have an account? <a href="{{route('login')}}" class="text-blue-600 hover:underline">Login</a>
+              </div>
+            </div>
+          </main>
+                <!-- Toggle dark mode button -->
+      <div class="fixed bottom-5 left-5">
+        <button
+          aria-hidden="true"
+          @click="toggleTheme"
+          class="p-2 transition-colors duration-200 rounded-full shadow-md bg-primary hover:bg-primary-darker focus:outline-none focus:ring focus:ring-primary"
+        >
+          <svg
+            x-show="isDark"
+            class="w-8 h-8 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+            />
+          </svg>
+          <svg
+            x-show="!isDark"
+            class="w-8 h-8 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+            />
+          </svg>
+        </button>
+      </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    </script>
+
     <script>
-        $(document).ready(function() {
-            let provinceId = $('#provinsi').val();
-            let kotaId = $('#kota').val();
-            let kecamatanId = $('#kecamatan').val();
-            $('#provinsi').select2();
-            $('#provinsi').change(function() {
-                $('#kota').empty();
-                $('#kecamatan').empty();
-                $("#desa").empty();
-                let provinceId = $(this).val();
-                if (provinceId) {
-                    $('#kota').select2({
-                        placeholder: 'Pilih Kota/Kabupaten',
-                        allowClear: true,
-                        ajax: {
-                            url: "{{ route('dropdown.kota') }}?provinceId=" + provinceId,
-                            dataType: 'json',
-                            delay: 250,
-                            processResults: function(data) {
-                                console.log(data);
-                                return {
-                                    results: $.map(data, function(item) {
-                                        return {
-                                            text: item.name,
-                                            id: item.code
-                                        }
-                                    })
-                                };
-                            }
-                        }
-                    });
-                }
-            });
+      const setup = () => {
+        const getTheme = () => {
+          if (window.localStorage.getItem('dark')) {
+            return JSON.parse(window.localStorage.getItem('dark'))
+          }
+          return !!window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        }
 
-            $('#kota').select2();
-            $('#kota').change(function() {
-                $('#kecamatan').empty();
-                $("#desa").empty();
-                let kotaId = $(this).val();
-                if (kotaId) {
-                    $('#kecamatan').select2({
-                        placeholder: 'Pilih Kecamatan',
-                        allowClear: true,
-                        ajax: {
-                            url: "{{ route('dropdown.kecamatan') }}?kotaId=" + kotaId,
-                            dataType: 'json',
-                            delay: 250,
-                            processResults: function(data) {
-                                console.log(data);
-                                return {
-                                    results: $.map(data, function(item) {
-                                        return {
-                                            text: item.name,
-                                            id: item.code
-                                        }
-                                    })
-                                };
-                            }
-                        }
-                    });
-                } else {
-                    $("#kota").empty();
-                    $('#kecamatan').empty();
-                    $("#desa").empty();
-                }
-            });
+        const setTheme = (value) => {
+          window.localStorage.setItem('dark', value)
+        }
 
-            $('#kecamatan').select2();
-            $('#desa').select2();
-            $('#kecamatan').change(function() {
-                $("#desa").empty();
-                let kecamatanId = $(this).val();
-                if (kecamatanId) {
-                    $('#desa').select2({
-                        placeholder: 'Pilih Desa',
-                        allowClear: true,
-                        ajax: {
-                            url: "{{ route('dropdown.desa') }}?kecamatanId=" + kecamatanId,
-                            dataType: 'json',
-                            delay: 250,
-                            processResults: function(data) {
-                                console.log(data);
-                                return {
-                                    results: $.map(data, function(item) {
-                                        return {
-                                            text: item.name,
-                                            id: item.code
-                                        }
-                                    })
-                                };
-                            }
-                        }
-                    });
-                } else {
-                    $('#kecamatan').empty();
-                    $("#desa").empty();
-                }
-            });
+        const getColor = () => {
+          if (window.localStorage.getItem('color')) {
+            return window.localStorage.getItem('color')
+          }
+          return 'cyan'
+        }
 
-            $('#provinsi').on('select2:clear', function(e) {
-                $("#kota").select2();
-                $("#kecamatan").select2();
-                $("#desa").select2();
-            });
+        const setColors = (color) => {
+          const root = document.documentElement
+          root.style.setProperty('--color-primary', `var(--color-${color})`)
+          root.style.setProperty('--color-primary-50', `var(--color-${color}-50)`)
+          root.style.setProperty('--color-primary-100', `var(--color-${color}-100)`)
+          root.style.setProperty('--color-primary-light', `var(--color-${color}-light)`)
+          root.style.setProperty('--color-primary-lighter', `var(--color-${color}-lighter)`)
+          root.style.setProperty('--color-primary-dark', `var(--color-${color}-dark)`)
+          root.style.setProperty('--color-primary-darker', `var(--color-${color}-darker)`)
+          this.selectedColor = color
+          window.localStorage.setItem('color', color)
+        }
 
-            $('#kota').on('select2:clear', function(e) {
-                $("#kecamatan").select2();
-                $("#desa").select2();
-            });
-
-            $('#kecamatan').on('select2:clear', function(e) {
-                $("#desa").select2();
-            });
-        });
+        return {
+          loading: true,
+          isDark: getTheme(),
+          color: getColor(),
+          selectedColor: 'cyan',
+          toggleTheme() {
+            this.isDark = !this.isDark
+            setTheme(this.isDark)
+          },
+          setColors,
+        }
+      }
     </script>
-
 </body>
 
 </html>

@@ -89,6 +89,7 @@ $(function() {
         processing: true,
         serverSide: true,
         responsive: true,
+        // "searching": true,
 
         ajax: "{{ route('pinjaman.index') }}",
         columns: [{
@@ -100,7 +101,8 @@ $(function() {
             },
             {
                 data: 'user_id',
-                name: 'user.name'
+                name: 'user.name',
+                searchable: true
             },
             {
                 data: 'total_pinjaman',
@@ -247,7 +249,7 @@ aria-hidden="true">
                             @csrf
                             <div class="form-group">
                                 <label for="file">Import Disini <span class="text-danger">*</span></label>
-                                <input type="file" class="form-control form-control-sm">
+                                <input type="file" class="form-control form-control-sm" name="file">
                             </div>
                             <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
                         </form>

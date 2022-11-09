@@ -2,7 +2,8 @@
 
 namespace App\Imports;
 
-use App\Models\Pinjaman;
+use Carbon\Carbon;
+use App\Models\{Angsuran, Pinjaman};
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 
@@ -15,18 +16,34 @@ class PinjamanImport implements ToCollection
     {
         foreach ($collection as $row)
         {
-            $classroom = Classroom::where('name', $row[4])->first();
-            $student = Student::create([
-                'name' => $row[0],
-                'nisn' => $row[1],
-                'gender' => $row[2],
-                'religion' => $row[3],
-                'classroom_id' => $classroom->id,
-                'date_of_birth' => $row[5],
-                'phone' => $row[6],
-                'email' => $row[7],
-                'address' => $row[8],
+            // $user = User::where('name', $row[4])->first();
+            $total_pinjaman = $row[1];
+            $tenor = $row[5];
+            $pinjaman = Pinjaman::create([
+                'user_id' => $row[0],
+                'total_pinjaman' => $total_pinjaman,
+                'saldo_pinjaman' => $row[2],
+                'tanggal_pinjam' => $row[3],
+                'status' => $row[4],
+                'tenor' => $tenor,
+                'tunggakan' => $row[6],
+                'angsuran_bunga' => $row[7],
+                'angsuran_pokok' => $row[8],
+                'suku_bunga' => $row[9],
+                'total_angsuran' => $row[10],
+                'keterangan' => $row[11],
             ]);
+
+            for ($i = 0; $i < $tenor; $i++) {
+                Angsuran::create([
+                    'pinjaman_id' => $pinjaman->id,
+                    'pokok' => $pinjaman->angsuran_pokok,
+                    'bunga' => $pinjaman->angsuran_bunga,
+                    'total' => $pinjaman->total_angsuran,
+                    'jatuh_tempo' => Carbon::parse($pinjaman->tanggal_pinjam)->addMonth($i+1)->format('Y-m-d'),
+                    'angsuran_keberapa' => $i+1,
+                ]);
+            }
         }
     }
 }

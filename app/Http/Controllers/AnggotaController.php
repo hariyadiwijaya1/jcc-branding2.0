@@ -11,4 +11,9 @@ class AnggotaController extends Controller
     {
         return $datatable->render('anggota.index');
     }
+
+    // public function export()
+    // {
+    //     return Excel::download(new PinjamanExport, 'pinjaman.xlsx');
+    // }
 }

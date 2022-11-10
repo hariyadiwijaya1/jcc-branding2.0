@@ -28,6 +28,8 @@ class RoleSeeder extends Seeder
             'user-module',
             'role-module',
             'developer-module',
+            'pinjaman-module',
+            'bunga-module',
         ]);
 
         $admin->givePermissionTo([

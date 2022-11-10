@@ -14,6 +14,6 @@ class BungaSeeder extends Seeder
      */
     public function run()
     {
-        Bunga::create(['suku_bunga'=>2]);
+        Bunga::create(['suku_bunga'=>6]);
     }
 }

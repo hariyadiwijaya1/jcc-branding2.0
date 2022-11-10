@@ -8,6 +8,11 @@ use Yajra\DataTables\Facades\DataTables;
 
 class BungaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:bunga-module', ['only' => ['index','show', 'create', 'edit', 'store', 'update', 'destroy']]);
+    }
+
     public function index()
     {
         if (request()->ajax()){

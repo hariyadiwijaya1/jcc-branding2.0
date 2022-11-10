@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Angsuran, User, Pinjaman};
+use App\Models\{Angsuran, Bunga, User, Pinjaman};
 
 class HomeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Superadmin');
+    }
+
     public function index()
     {
         return view('home');
@@ -17,7 +22,7 @@ class HomeController extends Controller
         if ($user && auth()->user()->id == $user->id) {
             return view('profile', [
                 'user' => $user,
-                'pinjaman' => Pinjaman::where('user_id', $id)->get(),
+                'pinjaman' => Pinjaman::with('angsuran', 'user')->where('user_id', $id)->get(),
                 'angsuran' => Angsuran::with('pinjaman')
                     ->whereHas('pinjaman', function ($q) use ($user) {
                         $q->where('user_id', $user->id);
@@ -30,4 +35,10 @@ class HomeController extends Controller
         }
     }
 
+    public function createLoan()
+    {
+        return view('create-loan', [
+            'suku_bunga' => Bunga::first()->suku_bunga
+        ]);
+    }
 }

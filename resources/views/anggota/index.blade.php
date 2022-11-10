@@ -10,7 +10,7 @@
                         <i class="pe-7s-car icon-gradient bg-mean-fruit">
                         </i>
                     </div>
-                    <div>Users
+                    <div>Anggota
                         <div class="page-title-subheading">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="">Dashboard</a></li>
@@ -34,7 +34,7 @@
 
         <div class="main-card mb-3 card">
             <div class="card-header">
-                <h5 class="card-title">Data Users</h5>
+                <h5 class="card-title">Data Anggota</h5>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -43,7 +43,7 @@
                             <tr>
                                 <th class="text-center" width="3%">No</th>
                                 <th>Nama</th>
-                                <th>Email</th>
+                                <th>Pinjaman</th>
                                 <th class="text-center"><i class="fa fa-cogs"></i></th>
                             </tr>
                         </thead>
@@ -78,7 +78,7 @@ $(function() {
         serverSide: true,
         responsive: true,
 
-        ajax: "{{ route('users.index') }}",
+        ajax: "{{ route('anggota.index') }}",
         columns: [{
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex',
@@ -90,9 +90,9 @@ $(function() {
                 data: 'name',
                 name: 'name'
             },
-            {
-                data: 'email',
-                name: 'email'
+              {
+                data: 'pinjaman',
+                name: 'pinjaman'
             },
             {
                 data: 'action',

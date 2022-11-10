@@ -12,8 +12,8 @@ class DashboardController extends Controller
     {
         return view('dashboard', [
             'title' => 'Dashboard',
-            'anggota' => User::count(),
-            'pinjaman' => Pinjaman::get(),
+            'anggota' => User::with('pinjaman')->count(),
+            'pinjaman' => Pinjaman::with('angsuran', 'user')->get(),
         ]);
     }
 }

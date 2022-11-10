@@ -14,6 +14,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('profile/{id}', [HomeController::class, 'profile'])->name('profile');
+    Route::get('create-loan', [HomeController::class, 'createLoan'])->name('create-loan');
 
     Route::resources(['users' => UserController::class]);
     Route::resources(['roles' => RoleController::class]);

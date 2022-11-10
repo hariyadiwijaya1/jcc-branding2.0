@@ -13,10 +13,15 @@ use App\Models\{Bunga, Angsuran, Pinjaman};
 
 class PinjamanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:pinjaman-module', ['only' => ['index','show', 'create', 'edit', 'store', 'update', 'destroy']]);
+    }
+
     public function index()
     {
         if (request()->ajax()){
-            $pinjaman = Pinjaman::latest()->get();
+            $pinjaman = Pinjaman::with('user', 'angsuran')->latest()->get();
             return DataTables::of($pinjaman)
                 ->addIndexColumn()
                 ->editColumn('user_id', function (Pinjaman $pinjaman) {
@@ -84,7 +89,7 @@ class PinjamanController extends Controller
                     'angsuran_bunga' => $totalPinjaman * $suku_bunga / 100,
                     'total_angsuran' => $totalPinjaman / $tenor + $totalPinjaman * $suku_bunga / 100,
                     'keterangan' => '-',
-                    'suku_bunga' => $suku_bunga * $tenor,
+                    'suku_bunga' => $suku_bunga,
                 ]);
 
                 for ($i = 0; $i < $tenor; $i++) {
@@ -101,8 +106,8 @@ class PinjamanController extends Controller
         } catch (Exception $e) {
             return response()->json($e->getMessage());
         }
-
-        return redirect()->back();
+        flash('Berhasil Menambahkan Pinjaman. Mohon Tunggu Acc Dari Admin');
+        return redirect()->route('profile', auth()->user()->id);
     }
 
     public function show($id)

@@ -18,6 +18,8 @@ class PermissionSeeder extends Seeder
             'user-module',
             'role-module',
             'developer-module',
+            'pinjaman-module',
+            'bunga-module',
         ];
 
         foreach ($permissions as $permission) {

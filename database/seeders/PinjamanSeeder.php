@@ -18,7 +18,7 @@ class PinjamanSeeder extends Seeder
         $tgl_pinjam = ['2022-09-10', '2022-11-10', '2022-06-10', null];
         $nenor = [1, 3, 6, 12];
         $array = [1000000, 900000, 2000000, 3000000];
-        for ($ikhsan = 0; $ikhsan < 100; $ikhsan++) {
+        for ($ikhsan = 0; $ikhsan < 1000; $ikhsan++) {
             $finalTgl = $tgl_pinjam[array_rand($tgl_pinjam)];
             $totalPinjaman = $array[array_rand($array)];
             $tenor = $nenor[array_rand($nenor)];
@@ -26,7 +26,7 @@ class PinjamanSeeder extends Seeder
             $pinjaman = Pinjaman::create([
                 'user_id' => rand(3,32),
                 'total_pinjaman' => $totalPinjaman,
-                'saldo_pinjaman' => $totalPinjaman + $totalPinjaman * $suku_bunga / 100 * $tenor,
+                'saldo_pinjaman' => 0,
                 'tanggal_pinjam' => $finalTgl,
                 'tenor' => $tenor,
                 'angsuran_pokok' => $totalPinjaman / $tenor,
@@ -34,7 +34,7 @@ class PinjamanSeeder extends Seeder
                 'total_angsuran' => $totalPinjaman / $tenor + $totalPinjaman * $suku_bunga / 100,
                 'keterangan' => '-',
                 'status' => $finalTgl == null ? null : '1',
-                'suku_bunga' => $suku_bunga * $tenor,
+                'suku_bunga' => $suku_bunga,
             ]);
 
             for ($i = 0; $i < $tenor; $i++) {

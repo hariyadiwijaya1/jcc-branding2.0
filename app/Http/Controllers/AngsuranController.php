@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AngsuranExport;
 use Exception;
-use App\Exports\PinjamanExport;
 use Illuminate\Support\Facades\DB;
 use App\Models\{Angsuran, Pinjaman};
 use Maatwebsite\Excel\Facades\Excel;
@@ -52,6 +52,6 @@ class AngsuranController extends Controller
 
     public function export(Pinjaman $pinjaman)
     {
-        return Excel::download(new PinjamanExport($pinjaman->id), 'pinjaman.xlsx');
+        return Excel::download(new AngsuranExport($pinjaman->id), 'pinjaman.xlsx');
     }
 }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>K-WD Dashboard</title>
+    <title>Tambah Pinjaman</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('tailwinds') }}/public/build/css/tailwind.css" />
@@ -109,15 +109,10 @@
                                     @keydown.escape="open = false"
                                     class="absolute right-0 w-48 py-1 bg-white rounded-md shadow-lg top-12 ring-1 ring-black ring-opacity-5 dark:bg-dark focus:outline-none"
                                     tabindex="-1" role="menu" aria-orientation="vertical" aria-label="User menu">
-                                    <a  role="menuitem"
-                                        class="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-primary"
-                                        onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
+                                    <a href="#" role="menuitem"
+                                        class="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-primary">
                                         Logout
                                     </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
                                 </div>
                             </div>
                         </nav>
@@ -129,12 +124,12 @@
                     <!-- Content header -->
                     <div
                         class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
-                        <h1 class="text-2xl font-semibold">Dashboard</h1>
-                        <a href="{{ route('create-loan', []) }}"
-                            class="px-4 py-2 text-sm text-white rounded-md bg-primary hover:bg-primary-dark focus:outline-none focus:ring focus:ring-primary focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark"
-                            id="btnPinjaman">
-                            Ajukan Pinjaman
-                        </a>
+                        <h1 class="text-2xl font-semibold">Tambah Pinjaman</h1>
+                        <a href="{{ route('profile', auth()->user()->id) }}"
+                        class="px-4 py-2 text-sm text-white rounded-md bg-primary hover:bg-primary-dark focus:outline-none focus:ring focus:ring-primary focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark"
+                        id="btnPinjaman">
+                        Kembali Ke Profil
+                    </a>
                     </div>
 
                     <!-- Content -->
@@ -143,178 +138,58 @@
                         <div class="grid grid-cols-1 gap-8 p-4 xl:grid-cols-4">
                             <!-- Value card -->
 
+                            <form action="{{ route('pinjaman.store', []) }}" method="POST">
+                                @csrf
+                                <div class="grid grid-cols-2 gap-6">
+                                    <div>
+                                        <div class="mb-3">
+                                            <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Total Pinjaman <span class="text-red-600">*</span></label>
+                                            <input type="number" id="total_pinjaman" name="total_pinjaman" class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            @error('total_pinjaman')
+                                                <span class="text-red-500 px-4 py-2 text-xs red" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="tenor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Pilih Jangka Peminjaman / Tenor <span class="text-red-600">*</span></label>
+                                            <select id="tenor" name="tenor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-not-allowed" disabled>
+                                            <option selected disabled>Pilih Tenor</option>
+                                            <option value="1">1 Bulan</option>
+                                            <option value="3">3 Bulan</option>
+                                            <option value="6">6 Bulan</option>
+                                            <option value="9">9 Bulan</option>
+                                            </select>
+                                            @error('tenor')
+                                                <span class="text-red-500 px-4 py-2 text-xs red" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="mb-3">
+                                            <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bunga Perbulan %</label>
+                                            <input type="text" id="suku_bunga" data-id="{{ $suku_bunga }}" class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-not-allowed" disabled>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Angsuran Bunga Perbulan</label>
+                                            <input type="text" id="angsuran_bunga" class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-not-allowed" disabled>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="angsuran_pokok" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Angsuran Pokok Perbulan</label>
+                                            <input type="text" id="angsuran_pokok" class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-not-allowed" disabled>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="total_angsuran" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Total Angsuran Perbulan</label>
+                                            <input type="text" id="total_angsuran" class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-not-allowed" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit"
+                                            class="py-2 px-3 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 float-right justify-items-end">Submit</button>
+                            </form>
 
-                            <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
-                                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                                    <caption
-                                        class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                                        Data Pinjaman
-                                        {{-- <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Browse a
-                                            list of Flowbite products designed to help you work and play, stay
-                                            organized, get answers, keep in touch, grow your business, and more.</p> --}}
-                                    </caption>
-                                    <thead
-                                        class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                        <tr>
-                                            <th scope="col" class="py-3 px-6">
-                                                Total Pinjaman
-                                            </th>
-                                            <th scope="col" class="py-3 px-6">
-                                                Total Angsuran
-                                            </th>
-                                            <th scope="col" class="py-3 px-6">
-                                                Tunggakan
-                                            </th>
-                                            <th scope="col" class="py-3 px-6">
-                                                Tanggal Pinjam
-                                            </th>
-                                            <th scope="col" class="py-3 px-6">
-                                                Tenor
-                                            </th>
-                                            <th scope="col" class="py-3 px-6">
-                                                Suku Bunga
-                                            </th>
-                                            <th scope="col" class="py-3 px-6">
-                                                Status
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($pinjaman as $item)
-                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row"
-                                                class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ number_format($item->total_pinjaman )}}
-                                            </th>
-                                            <td class="py-4 px-6">
-                                                {{ number_format($item->total_angsuran )}}
-                                            </td>
-                                            <td class="py-4 px-6">
-                                                {{ number_format($item->arrears )}}
-                                            </td>
-                                            <td class="py-4 px-6">
-                                                {{ $item->tanggal_pinjam ? date('d-m-Y', strtotime($item->tanggal_pinjam)) : '' }}
-                                            </td>
-                                            <td class="py-4 px-6">
-                                                {{ $item->tenor }} bln
-                                             </td>
-                                             <td class="py-4 px-6">
-                                                {{ $item->suku_bunga }} %
-                                             </td>
-                                            <td class="py-4 px-6">
-                                                @php
-                                                    if ($item->status == null) {
-                                                        echo 'Menunggu';
-                                                    } elseif ($item->status == 1) {
-                                                        echo 'Diterima';
-                                                    } else {
-                                                        echo 'Ditolak';
-                                                    }
-                                                @endphp
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <!-- Table ANgsuran -->
-                            <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
-                                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                                    <caption
-                                        class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                                        Data Angsuran
-                                        {{-- <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Browse a
-                                            list of Flowbite products designed to help you work and play, stay
-                                            organized, get answers, keep in touch, grow your business, and more.</p> --}}
-                                    </caption>
-                                    <thead
-                                        class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                        <tr>
-                                            <th scope="col" class="py-3 px-6">
-                                                No
-                                            </th>
-                                            <th scope="col" class="py-3 px-6">
-                                                Ke-
-                                            </th>
-                                            <th scope="col" class="py-3 px-6">
-                                                Pokok
-                                            </th>
-                                            <th scope="col" class="py-3 px-6">
-                                                Bunga
-                                            </th>
-                                            <th scope="col" class="py-3 px-6">
-                                                Total
-                                            </th>
-                                            <th scope="col" class="py-3 px-6">
-                                                Jatuh Tempo
-                                            </th>
-                                            <th scope="col" class="py-3 px-6">
-                                                Status
-                                            </th>
-                                            <th scope="col" class="py-3 px-6">
-                                                Bukti
-                                            </th>
-                                            <th scope="col" class="py-3 px-6">
-                                                Aksi
-                                            </th>
-                                            <th scope="col" class="py-3 px-6">
-                                                Aksi
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($angsuran as $item)
-                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row"
-                                                class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $loop->iteration }}
-                                            </th>
-                                            <th scope="row"
-                                                class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $item->angsuran_keberapa }}
-                                            </th>
-                                            <td class="py-4 px-6">
-                                                {{ number_format($item->pokok )}}
-                                            </td>
-                                            <td class="py-4 px-6">
-                                                {{ number_format($item->bunga )}}
-                                            </td>
-                                            <td class="py-4 px-6">
-                                                {{ number_format($item->total )}}
-                                            </td>
-                                            <td class="py-4 px-6">
-                                                {{ $item->jatuh_tempo ? date('d-m-Y', strtotime($item->jatuh_tempo)) : '' }}
-                                            </td>
-                                            <td class="py-4 px-6">
-                                                @php
-                                                    if ($item->status == 1) {
-                                                        $status = '<a class="btn btn-sm btn-primary">Sudah bayar</a>';
-                                                    } elseif ($item->status == 0 && \Carbon\Carbon::now() > $item->jatuh_tempo) {
-                                                        $status = '<a class="btn btn-sm btn-danger">Telat</a>';
-                                                    } else {
-                                                        $status = '<a class="btn btn-sm btn-warning">Belum Bayar</a>';
-                                                    }
-                                                    echo $status;
-                                                @endphp
-                                            </td>
-                                            <td><img src="{{ $item->takeImage }}" width="100"></td>
-                                            <form action="{{ route('angsuran.upload', $item->id) }}"
-                                                method="post" enctype="multipart/form-data">
-                                                @csrf
-                                                <td>
-                                                    <button type="submit"
-                                                        class="btn btn-sm btn-primary">Upload</button>
-                                                </td>
-                                                <td>
-                                                    <input type="file" name="bukti_transaksi">
-                                                </td>
-                                            </form>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
                         </div>
                     </div>
                 </main>
@@ -469,6 +344,34 @@
                 updateLineChart,
             }
         }
+    </script>
+    <script>
+        let total_pinjaman = document.getElementById('total_pinjaman');
+        let tenor = document.getElementById('tenor');
+        let suku_bunga = document.getElementById('suku_bunga');
+        let angsuran_bunga = document.getElementById('angsuran_bunga');
+        let angsuran_pokok = document.getElementById('angsuran_pokok');
+        let total_angsuran = document.getElementById('total_angsuran');
+        let bunga = suku_bunga.getAttribute('data-id');
+
+        total_pinjaman.addEventListener('input', function () {
+            tenor.removeAttribute('disabled')
+            tenor.classList.remove('cursor-not-allowed')
+        })
+
+        tenor.addEventListener("input", function () {
+            suku_bunga.value = bunga
+            angsuran_bunga.value = total_pinjaman.value * (suku_bunga.value / 100)
+            angsuran_pokok.value = total_pinjaman.value / tenor.value
+            total_angsuran.value = total_pinjaman.value / tenor.value + total_pinjaman.value * (suku_bunga.value / 100)
+        })
+
+        total_pinjaman.addEventListener("input", function () {
+            suku_bunga.value = bunga
+            angsuran_bunga.value = total_pinjaman.value * (suku_bunga.value / 100)
+            angsuran_pokok.value = total_pinjaman.value / tenor.value
+            total_angsuran.value = total_pinjaman.value / tenor.value + total_pinjaman.value * (suku_bunga.value / 100)
+        })
     </script>
 </body>
 

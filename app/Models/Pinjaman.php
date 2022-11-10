@@ -12,8 +12,17 @@ class Pinjaman extends Model
 
     protected $guarded = [];
     protected $table = 'pinjaman';
-    protected $appends = ['angsuran', 'arrears', 'sudah_bayar'];
+    protected $appends = ['angsuran', 'arrears', 'sudah_bayar', 'lunas'];
 
+    public function getLunasAttribute()
+    {
+        $angsuran = Angsuran::where('pinjaman_id', $this->id)->get();
+        foreach($angsuran as $data) {
+            if ($data->status == '1') {
+                return 'Lunas';
+            }
+        }
+    }
     public function getArrearsAttribute()
     {
         return Angsuran::where('pinjaman_id', $this->id)

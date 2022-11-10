@@ -31,7 +31,7 @@
 
         <div class="main-card mb-3 card">
             <div class="card-header">
-                <h5 class="card-title">Data Users</h5>
+                <h5 class="card-title">Data Pinjaman</h5>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -47,6 +47,7 @@
                                 <th>Suku Bunga</th>
                                 <th>Tunggakan</th>
                                 <th>Angsuran Total</th>
+                                <th>Status</th>
                                 <th>Status</th>
                                 <th class="text-center"><i class="fa fa-cogs"></i></th>
                             </tr>
@@ -136,6 +137,10 @@ $(function() {
             {
                 data: 'status',
                 name: 'status'
+            },
+            {
+                data: 'lunas',
+                name: 'lunas'
             },
             {
                 data: 'action',

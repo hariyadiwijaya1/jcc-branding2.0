@@ -18,7 +18,7 @@ class PinjamanSeeder extends Seeder
         $tgl_pinjam = ['2022-09-10', '2022-11-10', '2022-06-10', null];
         $nenor = [1, 3, 6, 12];
         $array = [1000000, 900000, 2000000, 3000000];
-        for ($ikhsan = 0; $ikhsan < 1000; $ikhsan++) {
+        for ($ikhsan = 0; $ikhsan < 100; $ikhsan++) {
             $finalTgl = $tgl_pinjam[array_rand($tgl_pinjam)];
             $totalPinjaman = $array[array_rand($array)];
             $tenor = $nenor[array_rand($nenor)];

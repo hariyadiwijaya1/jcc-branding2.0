@@ -15,7 +15,7 @@ class PinjamanController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:pinjaman-module', ['only' => ['index','show', 'create', 'edit', 'store', 'update', 'destroy']]);
+        $this->middleware('permission:pinjaman-module', ['only' => ['index','show', 'create', 'edit', 'update', 'destroy']]);
     }
 
     public function index()
@@ -112,7 +112,7 @@ class PinjamanController extends Controller
 
     public function show($id)
     {
-        $pinjaman = Pinjaman::with('angsuran')->find($id);
+        $pinjaman = Pinjaman::with('angsuran', 'user')->find($id);
         return response()->json($pinjaman);
     }
 

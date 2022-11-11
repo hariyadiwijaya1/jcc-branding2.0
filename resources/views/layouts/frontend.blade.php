@@ -86,6 +86,15 @@
                     <li class="dropdown"><a href="#" class="fa-solid fa-user"><i style="font-size: 32px;" class="bi-person-circle"></i> <i class="bi bi-chevron-down"></i></a>
 
                         <ul>
+                            @if (isset(auth()->user()->getRoleNames()[0]) ? auth()->user()->getRoleNames()[0] : null == 'Superadmin')
+                            <li>
+                                <a
+                                class="nav-link scrollto"
+                                href="{{ route('dashboard') }}">
+                                Dashboard
+                                </a>
+                            </li>
+                            @endif
                             <li>
                                 <a
                                 class="nav-link scrollto"

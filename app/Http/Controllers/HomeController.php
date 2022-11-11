@@ -6,11 +6,6 @@ use App\Models\{Angsuran, Bunga, User, Pinjaman};
 
 class HomeController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('role:Superadmin');
-    }
-
     public function index()
     {
         return view('home');

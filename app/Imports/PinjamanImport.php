@@ -42,6 +42,7 @@ class PinjamanImport implements ToCollection
                     'total' => $pinjaman->total_angsuran,
                     'jatuh_tempo' => Carbon::parse($pinjaman->tanggal_pinjam)->addMonth($i+1)->format('Y-m-d'),
                     'angsuran_keberapa' => $i+1,
+                    'status' => $pinjaman->tanggal_pinjam == null ? '0' : '1',
                 ]);
             }
         }

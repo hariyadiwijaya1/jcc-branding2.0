@@ -298,7 +298,15 @@
                                                     echo $status;
                                                 @endphp
                                             </td>
-                                            <td><img src="{{ $item->takeImage }}" width="100"></td>
+                                            <td>
+                                                @php
+                                                if ($item->bukti_transaksi != null) {
+                                                    echo '<img src="'.$item->takeImage.'" width="100">';
+                                                } else {
+                                                    echo 'belum';
+                                                }
+                                                @endphp
+                                            </td>
                                             <form action="{{ route('angsuran.upload', $item->id) }}"
                                                 method="post" enctype="multipart/form-data">
                                                 @csrf

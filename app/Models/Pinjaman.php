@@ -16,16 +16,12 @@ class Pinjaman extends Model
 
     public function getLunasAttribute()
     {
-        $angsuran = Angsuran::where('pinjaman_id', $this->id)->get();
-        foreach($angsuran as $data) {
-            if ($data->status == '1') {
-                return 'Lunas';
-            }
-        }
+        // $angsuran = Angsuran::with('pinjaman')->where('pinjaman_id', $this->id)->get();
+        return '-';
     }
     public function getArrearsAttribute()
     {
-        return Angsuran::where('pinjaman_id', $this->id)
+        return Angsuran::with('pinjaman')->where('pinjaman_id', $this->id)
             ->where('status', '0')
             ->where('jatuh_tempo', '<', \Carbon\Carbon::now())
             ->sum('total');
@@ -33,7 +29,7 @@ class Pinjaman extends Model
 
     public function getSudahBayarAttribute()
     {
-        return Angsuran::where('pinjaman_id', $this->id)
+        return Angsuran::with('pinjaman')->where('pinjaman_id', $this->id)
             ->where('status', '1')
             ->sum('total');
     }
